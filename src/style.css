@@ -38,6 +38,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+    background: #F5F5F5;
 }
 
 h1 {
@@ -57,22 +58,22 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  opacity: 0.8
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 .card {
   padding: 2em;
 }
 
 #app {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+input:focus-visible{
+  outline:0;
 }
 
 @media (prefers-color-scheme: light) {

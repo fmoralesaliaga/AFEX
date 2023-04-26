@@ -1,30 +1,84 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import URLInput from './components/URLInput.vue'
+import VideoGallery from './components/VideoGallery.vue';
+
+const myVideoList = [
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  {
+    videoId: 'Sunzh8kXuWU',
+    videoTitle: 'Video 1',
+    thumbnailUrl: 'http://i3.ytimg.com/vi/Sunzh8kXuWU/hqdefault.jpg',
+    link: 'https://multiverse.cl',
+  },
+  // Add more videos here
+];
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <URLInput class="URLInput"/>
+  <VideoGallery :videoList="myVideoList" class="gallery"/>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+  .URLInput{
+    width: 100%;
+  }
+  p{
+    position: absolute;
+    width: 242px;
+    height: 38px;
+    left: 356px;
+    top: 104px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 38px;
+    padding-bottom: 16px;
+    /* identical to box height, or 133% */
+
+    display: flex;
+    align-items: center;
+
+    color: #020202;
+  }
+
+  .gallery{
+    margin-top: 100px;
+    max-width: 929px;
+  }
+
+  app{
+    width: 1000px
+  }
 </style>
