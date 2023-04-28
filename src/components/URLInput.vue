@@ -1,18 +1,53 @@
 <template>
   <div class="input-button-container">
     <input type="text" v-model="inputValue" class="input-field" placeholder="Ingrese su texto aquí">
-    <button @click="saveInput" class="save-button">Añadir</button>
+    <button @click="guardarInput" class="save-button">Añadir</button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
+import {ref} from "vue";
+import {database, sRef, set} from "../utils/firebaseConfig";
+import { convertirDuracion, obtenerIdVideo, obtenerDatosVideoYoutube } from "../utils/youtube";
 const inputValue = ref('')
-
-function saveInput() {
+    
+function guardarInput() {
   // Hacer algo con el valor de entrada, como enviarlo a un servidor
-  console.log('Valor de entrada guardado: ' + inputValue.value)
+  const id = obtenerIdVideo(inputValue.value);
+  const key = "AIzaSyC3qRz2uGZUB7O6RSY4_1gk_EIvGxkjDiw"
+  
+
+  if(id){
+    obtenerDatosVideoYoutube(id, key).then(data => {
+        const videoInfo = {
+          id: id,
+          imagen: data.snippet.thumbnails.medium.url,
+          titulo: data.snippet.title,
+          descripcion: data.snippet.description,
+          duracion: convertirDuracion(data.contentDetails.duration),
+          link: inputValue.value,
+        }
+        console.log(id)
+        set(sRef(database, "videos/"+id), {
+          id: id,
+          titulo: data.snippet.title,
+          descripcion: data.snippet.description,
+          imagen: data.snippet.thumbnails.medium.url,
+          duracion: convertirDuracion(data.contentDetails.duration),
+          link: inputValue.value,
+        }).then(() => {
+          console.log("bien");
+        })
+        .catch((error) => {
+          console.error("hubo un error", error);
+        });
+    })
+    .catch(error => {
+      console.error("hubo un error", error);
+    });
+  }else{
+    console.log(false);
+  }
 }
 </script>
 
@@ -21,7 +56,8 @@ function saveInput() {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: 70vw;
+  min-width: 70vw;
   margin: 0 auto;
 }
 

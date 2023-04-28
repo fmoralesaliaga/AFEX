@@ -1,18 +1,26 @@
 <template>
-    <div class="video-gallery">
+    <div class="video-gallery" v-if="videoList">
       <div v-for="video in videoList" :key="video.videoId" class="video">
-        <VideoThumbnail :videoId="video.videoId" :videoTitle="video.videoTitle" :thumbnailUrl="video.thumbnailUrl" :link="video.link" />
+        <VideoThumbnail :id="video.id" :index="video.index" :titulo="video.titulo" :descripcion="video.descripcion" :imagen="video.imagen" :duracion="video.duracion" :link="video.link"/>
       </div>
     </div>
   </template>
   
   <script setup>
   import VideoThumbnail from './VideoThumbnail.vue';
+  import {ref, onMounted} from "vue";
+  import {database, sRef, onValue} from "../utils/firebaseConfig";
+  const videoList = ref({})
 
-  const props = defineProps({
-    videoList: Object
+  onMounted(() => {
+    const videosRef = sRef(database, 'videos');
+    onValue(videosRef, (snapshot) => {
+      const data = snapshot.val();
+      videoList.value = data;
+      console.log(videoList.value)
+    });
   })
-
+  
   </script>
   
   <style scoped>
@@ -20,6 +28,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    min-width: 80vw;
+    width: 90vw;
   }
 
   .video{
